@@ -10,7 +10,8 @@ public:
     LinkedList();
     ~LinkedList();
     void addEnd(int i);//add value to end list
-    void lookAll();
+    void lookAll();// all list to screen
+    int get(int index);//get element with the index
 private:
     int sizeList;//If list do not keep anything then ZERO
 
@@ -30,14 +31,18 @@ int main()/////////////////////////////////////////////
     LinkedList lst;
     srand(time('\0'));
     int num=1;
-    while(num)
+    while(num!=2)
     {
-        num=rand()%20;
+        num=rand()%10;
         lst.addEnd(num);
         cout<<num<<' ';
     }
     cout<<endl;
     lst.lookAll();
+    cout<<"put index=";
+    int index;
+    cin>>index;
+    cout<<"\nvalue="<<lst.get(index)<<endl;
 
     return 0;
 }/////////////////////////////////////////////////////////
@@ -91,3 +96,14 @@ void LinkedList::lookAll()
     cout<< last->var <<' ';
     cout<<endl;
 }
+int LinkedList::get(int index){
+    if( index>=sizeList || !sizeList) return 0;
+    int bufind=0;
+    Elem *pindex=first;
+    while(bufind!=index){
+        pindex=pindex->next;
+        bufind++;
+    }
+    return pindex->var;
+}
+
