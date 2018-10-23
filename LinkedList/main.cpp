@@ -12,6 +12,7 @@ public:
     void addEnd(int i);//add value to end list
     void lookAll();// all list to screen
     int get(int index);//get element with the index
+    void addMid(int i, int index);//a new element will be instead index-element
 private:
     int sizeList;//If list do not keep anything then ZERO
 
@@ -29,20 +30,40 @@ private:
 int main()/////////////////////////////////////////////
 {
     LinkedList lst;
+    int index;
     srand(time('\0'));
     int num=1;
-    while(num!=2)
+    //--------------------------
+    cout<<"\nmake array addEnd\n";
+    while(num!=2)//make array
     {
         num=rand()%10;
         lst.addEnd(num);
         cout<<num<<' ';
     }
     cout<<endl;
-    lst.lookAll();
-    cout<<"put index=";
-    int index;
+    //--------------------------
+    cout<<"\nCheck array\n";
+    lst.lookAll();//check "lookAll"
+    //--------------------------
+    /*
+    cout<<"\nCheck finding value by index\n";
+    cout<<"input index=";
+
     cin>>index;
-    cout<<"\nvalue="<<lst.get(index)<<endl;
+    cout<<"value="<<lst.get(index);// check "get"
+    */
+    //--------------------------
+    cout<<"\n\nCheck addMid\n";
+    cout<<"put index=";
+    cin>>index;
+    cout<<"\nput value=";
+    int value;
+    cin>>value;
+    lst.addMid(value,index);
+    //--------------------------
+    cout<<"\nCheck array\n";
+    lst.lookAll();//check "lookAll"
 
     return 0;
 }/////////////////////////////////////////////////////////
@@ -82,7 +103,9 @@ LinkedList::Elem::Elem(int i)
     next=NULL;
     var=i;
 }
-LinkedList::Elem::~Elem() {}
+LinkedList::Elem::~Elem()
+{
+}
 void LinkedList::lookAll()
 {
     if (!sizeList)
@@ -96,14 +119,45 @@ void LinkedList::lookAll()
     cout<< last->var <<' ';
     cout<<endl;
 }
-int LinkedList::get(int index){
-    if( index>=sizeList || !sizeList) return 0;
+int LinkedList::get(int index)
+{
+    if( index>=sizeList || !sizeList )
+        return 0;
     int bufind=0;
     Elem *pindex=first;
-    while(bufind!=index){
+    while(bufind!=index)
+    {
         pindex=pindex->next;
         bufind++;
     }
     return pindex->var;
 }
+void LinkedList::addMid(int i, int index)
+{
 
+
+    if( index>=sizeList || !sizeList || index<0)
+        addEnd(i);
+    else if (!index)
+    {
+        Elem *bufnext=first;
+        first=new Elem(i);
+        first->next=bufnext;
+        sizeList++;
+    }
+    else
+    {
+        int bufind=0;
+        Elem *pindex=first;
+        while(bufind!=index-1)
+        {
+            pindex=pindex->next;
+            bufind++;
+        }
+
+        Elem *bufnext=pindex->next;
+        pindex->next=new Elem(i);
+        pindex->next->next=bufnext;
+        sizeList++;
+    }
+}
