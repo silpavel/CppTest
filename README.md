@@ -1,2 +1,2 @@
 # test
-test tasks like bubble sort or lucky tiket for education
+The solutions like "bubble sort" or "lucky ticket" (for education).
