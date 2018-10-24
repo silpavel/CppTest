@@ -1,6 +1,13 @@
 # depslib dependency file v1.0
-1540369504 source:d:\c\linkedlist\main.cpp
+1540372034 source:d:\c\linkedlist\main.cpp
 	<iostream>
 	<ctime>
 	<cstdlib>
+	"link.h"
+
+1540372264 d:\c\linkedlist\link.h
+	<iostream>
+
+1540372292 source:d:\c\linkedlist\link.cpp
+	"link.h"
 
