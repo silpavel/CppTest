@@ -8,11 +8,12 @@ class LinkedList
 {
 public:
     LinkedList();
-    ~LinkedList();
+    ~LinkedList(){cout<<"\nrun destructur\n";empt();};
     void addEnd(int i);//add value to end list
     void lookAll();// all list to screen
     int get(int index);//get element with the index
     void addMid(int i, int index);//a new element will be instead index-element
+    void empt();//to empty the array
 private:
     int sizeList;//If list do not keep anything then ZERO
 
@@ -20,7 +21,7 @@ private:
     {
     public:
         Elem(int i);
-        ~Elem();
+        ~Elem(){};
         Elem *next;//Point to next element. Zero if the element is last
         int var;//a payload. We can use there point to value, array, or object
     };
@@ -73,10 +74,7 @@ LinkedList::LinkedList()
     sizeList=0;// if 0 that list do not keep anything
     int *Elem=NULL;////If list do not keep anything then ZERO
 }
-LinkedList::~LinkedList()
-{
-    cout<<"run destructor\n";
-}
+
 void LinkedList::addEnd(int i)
 {
     if(!sizeList) //if list is empty
@@ -103,9 +101,7 @@ LinkedList::Elem::Elem(int i)
     next=NULL;
     var=i;
 }
-LinkedList::Elem::~Elem()
-{
-}
+
 void LinkedList::lookAll()
 {
     if (!sizeList)
@@ -161,3 +157,16 @@ void LinkedList::addMid(int i, int index)
         sizeList++;
     }
 }
+void LinkedList::empt(){
+    Elem* buf=first;
+    sizeList=0;
+
+    while(buf){
+        buf=first->next;
+        cout<<(int)first<<" value="<<first->var<<" deleted\n";
+        delete first;
+        first=buf;
+    }
+    cout<<"All elements deleted";
+}
+
